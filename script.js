@@ -4,6 +4,10 @@ let width = 400;
 let height = 400;
 let size = 16;
 
+let mouseDown = false;
+document.body.onmousedown = () => {mouseDown = true};
+document.body.onmouseup = () => {mouseDown = false};
+
 function generateGrid(){
     let cellHeight = height/size;
     let cellWidth = width/size;
@@ -15,13 +19,14 @@ function generateGrid(){
         cell.style.height = `${cellHeight}px`;
     
         cell.addEventListener('mouseover',()=>{
+            if(mouseDown){
             console.log(cell.style.backgroundColor)
             if(cell.style.backgroundColor == ''){
                 let r = Math.floor(Math.random()*255);
                 let g = Math.floor(Math.random()*255);
                 let b = Math.floor(Math.random()*255);
                 cell.style.backgroundColor = `rgb(${r},${g},${b})`;
-            }
+            }}
         })
 
         container.appendChild(cell);
